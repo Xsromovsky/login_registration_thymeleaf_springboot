@@ -37,8 +37,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(org.springframework.security.config.annotation.web.builders.HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/registration").permitAll()
+        http.authorizeRequests().antMatchers(
+                        "/registration**",
+                        "/js/**",
+                        "/css/**",
+                        "/img/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -46,7 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();

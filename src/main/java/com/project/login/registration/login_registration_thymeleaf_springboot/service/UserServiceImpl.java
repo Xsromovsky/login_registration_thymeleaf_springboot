@@ -34,10 +34,10 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userRegistrationDto.getFirstName());
         user.setLastName(userRegistrationDto.getLastName());
         user.setEmail(userRegistrationDto.getEmail());
-        passwordEncoder.encode(userRegistrationDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+        //passwordEncoder.encode(userRegistrationDto.getPassword());
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
-
     }
 
     @Override
