@@ -11,6 +11,9 @@ public class UserRegistrationDto {
     private String email;
     private String password;
 
+    public UserRegistrationDto(){
+
+    }
     //create a constructor for the UserRegistrationDto class with super
     public UserRegistrationDto(String firstName, String lastName, String email, String password) {
         super();
@@ -19,5 +22,7 @@ public class UserRegistrationDto {
         this.email = email;
         this.password = password;
     }
+
+
 
 }

@@ -2,7 +2,11 @@ package com.project.login.registration.login_registration_thymeleaf_springboot.c
 
 
 import com.project.login.registration.login_registration_thymeleaf_springboot.service.UserService;
+import com.project.login.registration.login_registration_thymeleaf_springboot.web.dto.UserRegistrationDto;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,5 +19,21 @@ public class UserRegistrationController {
     public UserRegistrationController(UserService userService) {
         super();
         this.userService = userService;
+    }
+
+    @ModelAttribute("user")
+    public UserRegistrationDto userRegistrationDto(){
+        return new UserRegistrationDto();
+    }
+
+    @GetMapping
+    public String showRegistrationForm() {
+        return "registration";
+    }
+
+    @PostMapping
+    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto userRegistrationDto) {
+        userService.save(userRegistrationDto);
+        return "redirect:/registration?success";
     }
 }
