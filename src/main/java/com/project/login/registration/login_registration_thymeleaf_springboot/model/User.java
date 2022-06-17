@@ -1,9 +1,13 @@
 package com.project.login.registration.login_registration_thymeleaf_springboot.model;
 
+
+
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Collection;
 
 @Entity
@@ -17,11 +21,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="first_name")
+    @NotNull
     private String firstName;
+
     @Column(name="last_name")
+    @NotNull
     private String lastName;
 
+
     private String email;
+
     private String password;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
