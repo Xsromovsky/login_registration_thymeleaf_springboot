@@ -5,6 +5,8 @@ import com.project.login.registration.login_registration_thymeleaf_springboot.mo
 import com.project.login.registration.login_registration_thymeleaf_springboot.repository.UserRepository;
 import com.project.login.registration.login_registration_thymeleaf_springboot.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -30,5 +32,10 @@ public class UserServiceImpl implements UserService {
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
 
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
